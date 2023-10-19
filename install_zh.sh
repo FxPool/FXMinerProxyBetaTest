@@ -1,8 +1,8 @@
 #bin
 version='12.1.2'
-shell_version='3'
+shell_version='3.1'
 uiname='FXMinerProxyV3-shell'
-pkgname='FXMinerProxyBateTest'
+pkgname='FXMinerProxyBetaTest'
 authorname='FxPool'
 installname='install.sh'
 webuiname='ui'
