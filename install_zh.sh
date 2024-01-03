@@ -1,5 +1,5 @@
 #bin
-version='12.1.3.4-beta'
+version='13.0.0-beta'
 shell_version='3.1'
 uiname='FXMinerProxyV3-shell'
 pkgname='FXMinerProxyBetaTest'
