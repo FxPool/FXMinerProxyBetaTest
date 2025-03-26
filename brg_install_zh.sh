@@ -2,7 +2,7 @@
 
 router_line=$1
 
-version='13.3.6-test'
+version='13.3.7-test'
 shell_version='1.0-brg-shell'
 uiname='FXMinerProxyV3-shell'
 pkgname='FXMinerProxyBetaTest'
