@@ -236,7 +236,7 @@ start() {
             echo -e "${green}启动中..."
             cd $installdir
             sed -i 's/"is_open_general_swap": true/"is_open_general_swap": false/g' localconfig.json
-            setsid ./$wdog &
+            setsid ./$wdog -debug &
             sleep 3
         fi
     fi
@@ -266,7 +266,7 @@ autorun() {
     echo "#" >>rc.local
     echo "# By default this script does nothing." >>rc.local
     echo "#exit 0" >>rc.local
-    echo "cd $installdir && setsid ./$wdog &" >>rc.local
+    echo "cd $installdir && setsid ./$wdog -debug &" >>rc.local
     echo "exit 0" >>rc.local
     cd /root
     echo -e "${green}开机启动设置成功"
