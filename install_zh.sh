@@ -1,6 +1,6 @@
 #bin
-version='v15.1.8@251012@beta'
-shell_version='3.2.1'
+version='15.1.8-251012-beta'
+shell_version='3.2.3'
 uiname='FXMinerProxyV3-shell'
 pkgname='FXMinerProxyBetaTest'
 authorname='FxPool'
