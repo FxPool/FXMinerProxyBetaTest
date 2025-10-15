@@ -1,5 +1,5 @@
 #bin
-version='v15.1.8@251012@beta'
+version='v15.1.9@251015@beta'
 # 转换版本格式
 convert_version() {
     local version="$1"
