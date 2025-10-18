@@ -1,6 +1,20 @@
 #bin
 version=$1
-shell_version='3.1'
+# 转换版本格式
+convert_version() {
+    local version="$1"
+    
+    # 移除开头的 'v'
+    version="${version#v}"
+    
+    # 替换 '@' 为 '-'
+    version="${version//@/-}"
+    
+    echo "$version"
+}
+path_version=$(convert_version "$version")
+
+shell_version='3.5.5'
 uiname='FXMinerProxyV3-shell'
 pkgname='FXMinerProxyBetaTest'
 authorname='FxPool'
@@ -105,7 +119,7 @@ install() {
         wget https://github.com/$authorname/$pkgname/archive/refs/tags/$version.tar.gz
         if [ -f "$version.tar.gz" ]; then
             tar -zxvf $version.tar.gz
-            cd $pkgname-$version/
+            cd $pkgname-$path_version/
             tar -zxvf fxminerproxyv3linux.tar.gz
             mkdir fxpool-$sofname && chmod 777 fxpool-$sofname
             #判断文件夹是否创建成功
@@ -117,7 +131,7 @@ install() {
             mv fxminerproxyv3linux/running.sh fxpool-$sofname/$wdog
             cd fxpool-$sofname && chmod +x $wdog && chmod +x $sofname && cd ../
             cp -r fxpool-$sofname /etc/ && cd ../
-            rm -rf $pkgname-$version && rm $version.tar.gz
+            rm -rf $pkgname-$path_version && rm $version.tar.gz
             if [ ! -f "$installfolder" ]; then
                 rm -rf  $installdir
                 echo -e "${red}安装时失败，请输入一键安装脚本重新安装"
@@ -189,7 +203,7 @@ update_app() {
     kill_wdog
     killProcess
     tar -zxvf $version.tar.gz
-    cd $pkgname-$version/
+    cd $pkgname-$path_version/
     tar -zxvf fxminerproxyv3linux.tar.gz
     mkdir fxpool-$sofname && chmod 777 fxpool-$sofname
     #判断文件夹是否创建成功
@@ -206,12 +220,12 @@ update_app() {
             return
         fi
         cp -r fxpool-$sofname /etc/ && cd ../
-        rm -rf $pkgname-$version && rm $version.tar.gz
+        rm -rf $pkgname-$path_version && rm $version.tar.gz
         if [ ! -f "$installfolder" ]; then
             echo && echo -n -e "${yellow}更新失败,请程序打开脚本操作"
             return
         else
-            echo && echo -n -e "${yellow}更新完成,按回车启动,CTRL+C退出: ${plain}" && read temp
+            # echo && echo -n -e "${yellow}更新完成,按回车启动,CTRL+C退出: ${plain}" && read temp
             autorun
             start
         fi
@@ -236,7 +250,7 @@ start() {
             echo -e "${green}启动中..."
             cd $installdir
             sed -i 's/"is_open_general_swap": true/"is_open_general_swap": false/g' localconfig.json
-            setsid ./$wdog &
+            setsid ./$wdog -debug &
             sleep 3
         fi
     fi
@@ -266,7 +280,7 @@ autorun() {
     echo "#" >>rc.local
     echo "# By default this script does nothing." >>rc.local
     echo "#exit 0" >>rc.local
-    echo "cd $installdir && setsid ./$wdog &" >>rc.local
+    echo "cd $installdir && setsid ./$wdog -debug &" >>rc.local
     echo "exit 0" >>rc.local
     cd /root
     echo -e "${green}开机启动设置成功"
