@@ -1,6 +1,6 @@
 #bin
 version='v15.7.5@260310'
-# wget https://github.com/FxPool/FXMinerProxyBetaTest/archive/refs/tags/v15.7.3@260310.tar.gz
+# wget https://github.com/FxPool/FXMinerProxyBetaTest/archive/refs/tags/v15.7.5@260310.tar.gz
 # 转换版本格式
 convert_version() {
     local version="$1"
